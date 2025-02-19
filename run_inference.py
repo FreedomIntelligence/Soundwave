@@ -119,9 +119,7 @@ if __name__ == "__main__":
 
     device = 'cuda:2' if torch.cuda.is_available() else 'cpu'
 
-    base_model_path = args.base_model_path
-    audio_tower_path = args.audio_tower_path
-    model, audio_processor, tokenizer = load_model(base_model_path, audio_tower_path, device)
+    model, audio_processor, tokenizer = load_model(args.base_model_path, args.audio_tower_path, device)
 
     prompt = "Please transcribe the following audio and then answer based on the audio's transcription."
     audio_path = "assets/audio/example_1.wav"

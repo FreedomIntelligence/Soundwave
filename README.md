@@ -1,7 +1,7 @@
 # Soundwave: *Less is More* for Speech-Text Alignment in LLMs
 
 <p align="center">
-  <img src="assets/logo.png" style="width:300px; height:300px; margin-bottom:10px;"/>
+  <img src="assets/logo.png" style="width:240px; height:240px; margin-bottom:10px;"/>
 </p>
 
 <p align="center">
@@ -22,7 +22,7 @@
 ## 💌 News
 > <ul>
 >   <font size="3"><li>[19/02/2025] The online demo and model weights are coming soon. </li></font>
->   <font size="3"><li>[18/02/2025] Release the training and inference code. </li></font>
+>   <font size="3"><li>[18/02/2025] Release the model architecture and inference code. </li></font>
 > </ul>
 
 ## Project Structure
