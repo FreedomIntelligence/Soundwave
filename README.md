@@ -1,16 +1,17 @@
 # Soundwave: *Less is More* for Speech-Text Alignment in LLMs
 
-<div style="display: flex; align-items: center;">
-  <img src="logo.png" style="width:160px; height:160px; margin-right:20px;"/>
+<div>
+  <img src="logo.png" style="width:160px; height:160px; margin-right:20px; float: left;"/>
   <div>
     <h2>✨ Highlights of Our Soundwave Model !️</h2>
     <ul>
-      <font size="3"><li>A Speech-to-Text Model Bridging the Gap Between Speech and Text</font></li>
-      <font size="3"><li>Utilizes Data-Efficient Strategy and Unique Architecture, Trained on Only 10k Hours of Data</font></li>
-      <font size="3"><li>Exceptional Performance in Speech Translation and AIR-Bench Speech Tasks</font></li>
-      <font size="3"><li>Retains Intelligence During Conversations, Ideal for Interactive Tasks</font></li>
+      <font size="3"><li>A Speech-to-Text Model Bridging the Gap Between Speech and Text</li></font>
+      <font size="3"><li>Utilizes Data-Efficient Strategy and Unique Architecture, Trained on Only 10k Hours of Data</li></font>
+      <font size="3"><li>Exceptional Performance in Speech Translation and AIR-Bench Speech Tasks</li></font>
+      <font size="3"><li>Retains Intelligence During Conversations, Ideal for Interactive Tasks</li></font>
     </ul>
   </div>
+  <div style="clear:both;"></div>
 </div>
 
 <p align="center">
