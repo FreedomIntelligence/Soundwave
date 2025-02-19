@@ -1,8 +1,9 @@
 # Soundwave: *Less is More* for Speech-Text Alignment in LLMs
 
-<div style="text-align: center;">
+<p align="center">
   <img src="assets/logo.png" style="width:280px; height:280px; margin-bottom:10px;"/>
-</div>
+</p>
+
 <p align="center">
   <font size="3"><a href="https://huggingface.co/papers/2502.12900">🤗 HuggingFace</a>&nbsp｜&nbsp<a href="https://arxiv.org/abs/2502.12900">📃 Paper</a>｜&nbsp📼 Online Demo</a>&nbsp</font>
 </p>
