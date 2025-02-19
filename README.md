@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <font size="3"><a href="https://huggingface.co/papers/2502.12900">🤗 HuggingFace</a>&nbsp｜&nbsp<a href="https://arxiv.org/abs/2502.12900">📃 Paper</a>｜&nbsp📼 Online Demo</a>&nbsp</font>
+  <font size="3"><a href="https://huggingface.co/papers/2502.12900">🤗 HuggingFace</a>&nbsp｜&nbsp<a href="https://arxiv.org/abs/2502.12900">📃 Paper</a>｜&nbsp<a href="http://36.151.70.8:30113/">📼 Online Demo</a>&nbsp</font>
 </p>
 
 <div>
@@ -21,6 +21,7 @@
 
 ## 💌 News
 > <ul>
+>   <font size="3"><li>[19/02/2025] 🔥 You can now try our model in the <a href="http://36.151.70.8:30113/">📼 Online Demo</a>. </li></font>
 >   <font size="3"><li>[19/02/2025] The online demo and model weights are coming soon. </li></font>
 >   <font size="3"><li>[18/02/2025] Release the model architecture and inference code. </li></font>
 > </ul>
