@@ -1,7 +1,7 @@
 # Soundwave: *Less is More* for Speech-Text Alignment in LLMs
 
 <p align="center">
-  <img src="assets/logo.png" style="width:280px; height:280px; margin-bottom:10px;"/>
+  <img src="assets/logo.png" style="width:300px; height:300px; margin-bottom:10px;"/>
 </p>
 
 <p align="center">
