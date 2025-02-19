@@ -1,7 +1,7 @@
 # Soundwave: *Less is More* for Speech-Text Alignment in LLMs
 
 <div>
-  <img src="logo.png" style="width:160px; height:160px; margin-right:20px; float: left;"/>
+  <img src="assets/logo.png" style="width:160px; height:160px; margin-right:20px; float: left;"/>
   <div>
     <h2>✨ Highlights of Our Soundwave Model !️</h2>
     <ul>
