@@ -1,22 +1,22 @@
 # Soundwave: *Less is More* for Speech-Text Alignment in LLMs
 
-<div>
-  <img src="assets/logo.png" style="width:160px; height:160px; margin-right:20px; float: left;"/>
-  <div>
-    <h2>✨ Highlights of Our Soundwave Model !️</h2>
-    <ul>
-      <font size="3"><li>A Speech-to-Text Model Bridging the Gap Between Speech and Text</li></font>
-      <font size="3"><li>Utilizes Data-Efficient Strategy and Unique Architecture, Trained on Only 10k Hours of Data</li></font>
-      <font size="3"><li>Exceptional Performance in Speech Translation and AIR-Bench Speech Tasks</li></font>
-      <font size="3"><li>Retains Intelligence During Conversations, Ideal for Interactive Tasks</li></font>
-    </ul>
-  </div>
-  <div style="clear:both;"></div>
+<div style="text-align: center;">
+  <img src="assets/logo.png" style="width:280px; height:280px; margin-bottom:10px;"/>
 </div>
-
 <p align="center">
   <font size="3"><a href="https://huggingface.co/papers/2502.12900">🤗 HuggingFace</a>&nbsp｜&nbsp<a href="https://arxiv.org/abs/2502.12900">📃 Paper</a>｜&nbsp📼 Online Demo</a>&nbsp</font>
 </p>
+
+<div>
+  <h2>✨ Highlights of Our Soundwave Model !️</h2>
+  <ul>
+    <font size="3"><li>A Speech-to-Text Model Bridging the Gap Between Speech and Text</li></font>
+    <font size="3"><li>Utilizes Data-Efficient Strategy and Unique Architecture, Trained on Only 10k Hours of Data</li></font>
+    <font size="3"><li>Exceptional Performance in Speech Translation and AIR-Bench Speech Tasks</li></font>
+    <font size="3"><li>Retains Intelligence During Conversations, Ideal for Interactive Tasks</li></font>
+  </ul>
+</div>
+
 
 ## 💌 News
 > <ul>
