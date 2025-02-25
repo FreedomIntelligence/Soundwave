@@ -108,6 +108,5 @@ print(response)
   author={Zhang, Yuhao and Liu, Zhiheng and Bu, Fan and Zhang, Ruiyu and Wang, Benyou and Li, Haizhou},
   journal={arXiv preprint arXiv:2502.12900},
   year={2025}
-} 
 }
 ```
