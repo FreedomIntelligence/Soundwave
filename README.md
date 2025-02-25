@@ -103,13 +103,11 @@ print(response)
 ## Citation
 <font size="3">If you found this repository useful, please consider citing this work:</font>
 ```
-@misc{zhang2025soundwavespeechtextalignmentllms,
-      title={Soundwave: Less is More for Speech-Text Alignment in LLMs}, 
-      author={Yuhao Zhang and Zhiheng Liu and Fan Bu and Ruiyu Zhang and Benyou Wang and Haizhou Li},
-      year={2025},
-      eprint={2502.12900},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2502.12900}, 
+@article{zhang2025soundwave,
+  title={Soundwave: Less is More for Speech-Text Alignment in LLMs},
+  author={Zhang, Yuhao and Liu, Zhiheng and Bu, Fan and Zhang, Ruiyu and Wang, Benyou and Li, Haizhou},
+  journal={arXiv preprint arXiv:2502.12900},
+  year={2025}
+} 
 }
 ```
