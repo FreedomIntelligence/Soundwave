@@ -55,7 +55,7 @@ pip install -r requirements.txt
 <font size="3">To run the inference script and process the audio, use the following command:</font>
 ```bash
 python run_inference.py --model_path <model_path>
-# --model_path: Path to the pre-trained Soundwave model.
+# model_path: Path to the pre-trained Soundwave model.
 ```
 
 <font size="3">Below are some quick usage examples you can try:</font>
@@ -66,8 +66,7 @@ from run_inference import load_model, gen_model_inputs, CONFIG
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-base_model_path = "FreedomIntelligence/Soundwave"
-model, audio_processor, tokenizer = load_model(model_path, device)
+model, audio_processor, tokenizer = load_model("FreedomIntelligence/Soundwave", device)
 
 # apply chat template
 prompt = "What does the person say?"
