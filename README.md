@@ -21,7 +21,7 @@
 
 ## 💌 News
 > <ul>
->   <font size="3"><li>[19/02/2025] 🔥 We released Soundwave weights using Whisper-large-v2 for faster training. <a href="https://huggingface.co/FreedomIntelligence/Soundwave">🤗 Model </a> ! </li></font>
+>   <font size="3"><li>[05/03/2025] 🔥 We released Soundwave weights using Whisper-large-v2 for faster training. <a href="https://huggingface.co/FreedomIntelligence/Soundwave">🤗 Model </a> ! </li></font>
 >   <font size="3"><li>[19/02/2025] Try our model now in the <a href="https://huggingface.co/spaces/FreedomIntelligence/SoundwaveDemo">📼 Online Demo</a> . </li></font>
 >   <font size="3"><li>[19/02/2025] The online demo and model weights are coming soon. </li></font>
 >   <font size="3"><li>[18/02/2025] Release the model architecture and inference code. </li></font>
