@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <font size="3"><a href="https://huggingface.co/papers/2502.12900">🤗 HuggingFace Paper</a>&nbsp｜&nbsp<a href="https://huggingface.co/FreedomIntelligence/Soundwave">🤗 HuggingFace Model</a>｜&nbsp<a href="https://arxiv.org/abs/2502.12900">📃 Paper</a>｜&nbsp<a href="https://huggingface.co/spaces/FreedomIntelligence/SoundwaveDemo">📼 Online Demo</a>&nbsp</font>
+  <font size="3"><a href="https://huggingface.co/papers/2502.12900">🤗 Paper</a>&nbsp｜&nbsp<a href="https://huggingface.co/FreedomIntelligence/Soundwave">🤗 Model</a>｜&nbsp<a href="https://arxiv.org/abs/2502.12900">📃 Paper</a>｜&nbsp<a href="https://huggingface.co/spaces/FreedomIntelligence/SoundwaveDemo">📼 Online Demo</a>&nbsp</font>
 </p>
 
 <div>
@@ -54,13 +54,10 @@ pip install -r requirements.txt
 ### Usage Command
 <font size="3">To run the inference script and process the audio, use the following command:</font>
 ```bash
-python run_inference.py --audio_tower <audio_tower_path> --base_model_path <base_model_path>
+python run_inference.py --model_path <model_path>
+# --model_path: Path to the pre-trained Soundwave model.
 ```
 
-<font size="3">Options:
-- `--audio_tower`: Path to the Whisper audio preprocessing model.
-- `--base_model_path`: Path to the pre-trained Soundwave model.</font>
-###
 <font size="3">Below are some quick usage examples you can try:</font>
 ```python
 import torch
