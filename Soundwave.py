@@ -10,10 +10,8 @@ from transformers import AutoConfig, AutoModelForCausalLM, \
                          LlamaConfig, LlamaModel, LlamaForCausalLM
 from transformers.trainer_pt_utils import LabelSmoother
 from transformers.modeling_outputs import BaseModelOutputWithPast, CausalLMOutputWithPast
-from transformers import (
-    WhisperProcessor,
-    WhisperModel,
-)
+from transformers.models.whisper.modeling_whisper import WhisperEncoder, WhisperConfig
+
 
 IGNORE_TOKEN_ID = LabelSmoother.ignore_index
 
@@ -21,12 +19,6 @@ IGNORE_TOKEN_ID = LabelSmoother.ignore_index
 class SoundwaveConfig(LlamaConfig):
     model_type = "Soundwave"
     
-
-def load_whisper(audio_tower_name):
-    model = WhisperModel.from_pretrained(audio_tower_name,torch_dtype=torch.float16, low_cpu_mem_usage=True)
-    model.config.forced_decoder_ids = None
-    return model
-
 class LookBackModule(nn.Module):
     def __init__(self, cfg: LlamaConfig):
         super().__init__()
@@ -58,10 +50,6 @@ class SoundwaveModel(LlamaModel):
     def __init__(self, config: LlamaConfig):
         super(SoundwaveModel, self).__init__(config)
 
-        if hasattr(config, "audio_tower"):
-            self.audio_tower = [load_whisper(config.audio_tower)]
-            self.audio_config = self.audio_tower[0].config
-
         if hasattr(config, "adapter_size"):
             self.mm_projector1 = nn.Linear(config.adapter_size*2 , config.hidden_size)
             self.lbm =  LookBackModule(config)
@@ -77,6 +65,8 @@ class SoundwaveModel(LlamaModel):
             )
             self.asr_transformer_encoder = nn.TransformerEncoder(asr_encoder_layer, num_layers=1)
         
+        if hasattr(config, "audio_tower"):
+            self.audio_tower = WhisperEncoder(WhisperConfig.from_pretrained(config.audio_tower))
         self.mask_tensor=(torch.ones([1,1024])>0)
         self.length=-1
 
@@ -102,7 +92,7 @@ class SoundwaveModel(LlamaModel):
             for audio in audios:
                 with torch.no_grad():
                     audio=audio.unsqueeze(0)
-                    audio_feature = self.audio_tower[0].encoder(audio).last_hidden_state
+                    audio_feature = self.audio_tower(audio).last_hidden_state
            
                 audio_feature = audio_feature.view(audio_feature.shape[0], audio_feature.shape[1]//2, 2 * audio_feature.shape[2])
                 audio_feature = self.mm_projector1(audio_feature)
@@ -124,7 +114,7 @@ class SoundwaveModel(LlamaModel):
                 
             lengths = shrink_mask.long().sum(-1)
             shrink_2d = audio_features[shrink_mask]
-            num_patches = self.audio_config.audio_patch_size
+            num_patches = self.config.audio_patch_size
             l_index=0
             shrink_features = []
             for v, audio_feature, mask in zip(lengths, audio_features, ~shrink_mask):
@@ -137,10 +127,10 @@ class SoundwaveModel(LlamaModel):
                 maxn_length = lengths.max()
                 label_extend = maxn_length - num_patches
                 for cur_input_ids, cur_input_embeds, shrink_feature in zip(input_ids, inputs_embeds, shrink_features):
-                    pad_ids = torch.full(size=(maxn_length,), fill_value=self.audio_config.llm_pad_token_id, dtype=torch.long).to(attention_mask.device)
+                    pad_ids = torch.full(size=(maxn_length,), fill_value=self.config.llm_pad_token_id, dtype=torch.long).to(attention_mask.device)
                     pad_embeds = self.embed_tokens(pad_ids)
                     v = shrink_feature.shape[0]
-                    audio_start_token_pos = torch.where(cur_input_ids == self.audio_config.audio_patch_token)[0][:1]
+                    audio_start_token_pos = torch.where(cur_input_ids == self.config.audio_patch_token)[0][:1]
                     cur_new_input_id = torch.cat((cur_input_ids[:audio_start_token_pos], cur_input_ids[audio_start_token_pos: audio_start_token_pos+1].repeat(v), cur_input_ids[audio_start_token_pos + num_patches:], pad_ids[:maxn_length - v]), dim=0)
                     cur_new_input_embeds = torch.cat((
                     cur_input_embeds[:audio_start_token_pos],
@@ -151,13 +141,13 @@ class SoundwaveModel(LlamaModel):
                     label_shift.append(v - num_patches)
                     
                 input_ids = torch.stack(new_input_ids, dim=0)
-                attention_mask=input_ids.ne(self.audio_config.llm_pad_token_id)
+                attention_mask=input_ids.ne(self.config.llm_pad_token_id)
                 inputs_embeds = torch.stack(new_input_embeds, dim=0) 
             else:
                 for cur_input_ids, cur_input_embeds, shrink_feature in zip(input_ids, inputs_embeds, shrink_features):
                     v = shrink_feature.shape[0]
 
-                    audio_start_token_pos = torch.where(cur_input_ids == self.audio_config.audio_patch_token)[0][:1]
+                    audio_start_token_pos = torch.where(cur_input_ids == self.config.audio_patch_token)[0][:1]
                     cur_new_input_id = torch.cat((cur_input_ids[:audio_start_token_pos],cur_input_ids[audio_start_token_pos: audio_start_token_pos+1].repeat(v), cur_input_ids[audio_start_token_pos + num_patches:]),dim=0)
                     cur_new_input_embeds = torch.cat((
                     cur_input_embeds[:audio_start_token_pos],
@@ -166,7 +156,7 @@ class SoundwaveModel(LlamaModel):
                     new_input_embeds.append(cur_new_input_embeds)
                     new_input_ids.append(cur_new_input_id)
                 input_ids = torch.stack(new_input_ids, dim=0)
-                attention_mask=input_ids.ne(self.audio_config.llm_pad_token_id)
+                attention_mask=input_ids.ne(self.config.llm_pad_token_id)
                 inputs_embeds = torch.stack(new_input_embeds, dim=0)
                 self.mask_tensor.to(input_ids.device)[0][:attention_mask.shape[1]]=attention_mask[0]
                 self.length=attention_mask.shape[1]
@@ -258,7 +248,7 @@ class SoundwaveForCausalLM(LlamaForCausalLM):
                         asr_targets,
                         input_lengths,
                         target_lengths,
-                        blank=self.model.audio_config.audio_patch_token,
+                        blank=self.model.config.audio_patch_token,
                         reduction='mean',
                         zero_infinity=True,
                     )

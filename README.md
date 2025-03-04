@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <font size="3"><a href="https://huggingface.co/papers/2502.12900">🤗 HuggingFace</a>&nbsp｜&nbsp<a href="https://arxiv.org/abs/2502.12900">📃 Paper</a>｜&nbsp<a href="https://huggingface.co/spaces/FreedomIntelligence/SoundwaveDemo">📼 Online Demo</a>&nbsp</font>
+  <font size="3"><a href="https://huggingface.co/papers/2502.12900">🤗 HuggingFace Paper</a>&nbsp｜&nbsp<a href="https://huggingface.co/FreedomIntelligence/Soundwave">🤗 HuggingFace Model</a>｜&nbsp<a href="https://arxiv.org/abs/2502.12900">📃 Paper</a>｜&nbsp<a href="https://huggingface.co/spaces/FreedomIntelligence/SoundwaveDemo">📼 Online Demo</a>&nbsp</font>
 </p>
 
 <div>
@@ -21,7 +21,8 @@
 
 ## 💌 News
 > <ul>
->   <font size="3"><li>[19/02/2025] 🔥 Try our model now in the <a href="https://huggingface.co/spaces/FreedomIntelligence/SoundwaveDemo">📼 Online Demo</a> ! </li></font>
+>   <font size="3"><li>[19/02/2025] 🔥 We released Soundwave using Whisper-large-v2 for faster training. <a href="https://huggingface.co/FreedomIntelligence/Soundwave">🤗 HuggingFace </a> ! </li></font>
+>   <font size="3"><li>[19/02/2025] Try our model now in the <a href="https://huggingface.co/spaces/FreedomIntelligence/SoundwaveDemo">📼 Online Demo</a> . </li></font>
 >   <font size="3"><li>[19/02/2025] The online demo and model weights are coming soon. </li></font>
 >   <font size="3"><li>[18/02/2025] Release the model architecture and inference code. </li></font>
 > </ul>
@@ -30,9 +31,6 @@
 ```
 .
 ├── assets/
-│   ├── models/
-│   │   ├── whisper/               # Whisper
-│   │   └── Soundwave/             # Soundwave model weights
 │   └── audio/                     # Directory for test audio files (e.g., .wav files)
 ├── README.md                      
 ├── run_inference.py               # Main inference script
@@ -71,9 +69,8 @@ from run_inference import load_model, gen_model_inputs, CONFIG
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-base_model_path = "assets/models/Soundwave"
-audio_tower_path = "assets/models/whisper"
-model, audio_processor, tokenizer = load_model(base_model_path, audio_tower_path, device)
+base_model_path = "FreedomIntelligence/Soundwave"
+model, audio_processor, tokenizer = load_model(model_path, device)
 
 # apply chat template
 prompt = "What does the person say?"
@@ -92,7 +89,9 @@ output_ids = model.generate(
     audios=audio_feat,
     max_new_tokens=512,
     eos_token_id=tokenizer.eos_token_id,
-    temperature=0.2,
+    do_sample=True,
+    top_p=0.9,
+    temperature=0.2
 )
 
 input_token_len = model_inputs["input_ids"].shape[1]
